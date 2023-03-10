@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+// import TypeWriterEffect from './TypeWriterEffect'
+import D3BarChart from './D3BarChart';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main className="App-header">
+        {/* <section className='TypeWriterEffect'>
+          <TypeWriterEffect typingSpeed={50} text="Hello, world! This is the typewriter effect. Hello, world! This is the typewriter effect. Hello, world! This is the typewriter effect.Hello, world! This is the typewriter effect. Hello, world! This is the typewriter effect. Hello, world! This is the typewriter effect.Hello, world! This is the typewriter effect. Hello, world! This is the typewriter effect." />
+        </section> */}
+        <section className='d3BarChart'>
+          <D3BarChart />
+        </section>
+      </main>
     </div>
   );
 }
