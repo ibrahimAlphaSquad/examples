@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 
 function D3BarChart() {
-  const [dataset] = useState([12, 31, 22, 17, 25, 18, 29, 14, 9]);
+  const [dataset] = useState([12, 31, 22, 17, 25, 18, 29, 14, 50]);
   const svgRef = useRef()
 
   useEffect(() => {
@@ -23,30 +23,29 @@ function D3BarChart() {
       .attr("height", (d, i) => 3 * d)
       .attr("fill", "navy");
 
-    // If setting the scaling
-    let xScale = d3.scaleBand()
-      .domain(dataset.map((val, i) => i))
-      .range([0, w])
-      .padding(0.5);
-    let yScale = d3.scaleLinear()
-      .domain([0, h])
-      .range([h, 0]);
+    // // If setting the scaling
+    // let xScale = d3.scaleBand()
+    //   .domain(dataset.map((val, i) => i))
+    //   .range([0, w])
+    //   .padding(0.5);
+    // let yScale = d3.scaleLinear()
+    //   .domain([0, h])
+    //   .range([h, 0]);
 
-    // setting the axes
-    let xAxis = d3.axisBottom(xScale)
-      .ticks(dataset.length);
-    let yAxis = d3.axisLeft(yScale)
-      .ticks(5);
-    svg.append('g')
-      .call(xAxis)
-      .attr('transfrom', `translate(0,${h})`)
-    svg.append('g')
-      .call(yAxis);
+    // // setting the axes
+    // let xAxis = d3.axisBottom(xScale)
+    //   .ticks(dataset.length);
+    // let yAxis = d3.axisLeft(yScale)
+    //   .ticks(5);
+    // svg.append('g')
+    //   .call(xAxis)
+    //   .attr('transfrom', `translate(0,${h})`)
+    // svg.append('g')
+    //   .call(yAxis);
 
     svg.selectAll("text")
       .data(dataset)
       .enter()
-      // Add your code below this line
       .append("text")
       .attr("x", (d, i) => i * 30)
       .attr("y", (d, i) => h - 3 * d - 3)
