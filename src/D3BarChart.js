@@ -2,53 +2,42 @@ import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 
 function D3BarChart() {
-  const [data] = useState([200, 250, 60, 150, 100, 175]);
+  const [dataset ] = useState([12, 31, 22, 17, 25, 18, 29, 14, 9]);
   const svgRef = useRef()
 
   useEffect(() => {
     // setting up svg container
-    const w = 400;
-    const h = 300;
-    const svg = d3.select(svgRef.current)
-      .attr('width', w)
-      .attr('height', h)
-      .style('overflow', 'visible')
-      .style('margin-top', '75px')
+    let w = 400;
+    let h = 300;
+    let svg = d3.select(svgRef.current)
+      .attr("width", w)
+      .attr("height", h);
 
-    // If setting the scaling
-    const xScale = d3.scaleBand()
-      .domain(data.map((val, i) => i))
-      .range([0, w])
-      .padding(0.5);
-    const yScale = d3.scaleLinear()
-      .domain([0, h])
-      .range([h, 0]);
+    svg.selectAll("rect")
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => i * 30)
+      .attr("y", (d, i) => h - 3 * d)
+      .attr("width", 25)
+      .attr("height", (d, i) => 3 * d)
+      .attr("fill", "navy");
 
-    // setting the axes
-    const xAxis = d3.axisBottom(xScale)
-      .ticks(data.length);
-    const yAxis = d3.axisLeft(yScale)
-      .ticks(5);
-    svg.append('g')
-      .call(xAxis)
-      .attr('transfrom', `translate(0,${h})`)
-    svg.append('g')
-      .call(yAxis);
+    svg.selectAll("text")
+      .data(dataset)
+      .enter()
+      // Add your code below this line
+      .append("text")
+      .attr("x", (d, i) => i * 30)
+      .attr("y", (d, i) => h - 3 * d - 3)
+      .text((x) => x)
+      .text((y) => y)
+  }, [dataset])
 
-    // setting the svg data
-    svg.selectAll('.bar')
-      .data(data)
-      .join('rect')
-      .attr('fill', '#25da31')
-      .attr('x', (v, i) => xScale(i))
-      .attr('y', yScale)
-      .attr('width', xScale.bandwidth())
-      .attr('heigth', val => h - yScale(val))
-  }, [data])
 
   return (
     <>
-      <h1 style={{ color: "black", textAlign: "center" }}>D3BarChart</h1>
+      <h1 style={{ color: "black", textAlign: "center" }}>D3 Bar Chart Example</h1>
       <svg ref={svgRef}></svg>
     </>
   )
